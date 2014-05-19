@@ -1,0 +1,15 @@
+option py_generic_services = true;
+
+message HelloRequest
+{
+   required string my_name = 2;
+}
+
+message HelloResponse 
+{
+  required string hello_world = 1;
+}
+
+service SearchService {
+  rpc Search (SearchRequest) returns (SearchResponse);
+}
