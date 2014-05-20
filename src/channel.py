@@ -38,16 +38,16 @@ import socket
 
 # Third party imports
 import google.protobuf.service as service
-from protobuf.socketrpc.error import RpcError
+#from protobuf.socketrpc.error import RpcError
 
 # Module imports
-import rpc_pb2 as rpc_pb
-from protobuf.socketrpc import logger
-from protobuf.socketrpc.controller import SocketRpcController
-from protobuf.socketrpc import error
+import protos.rpc_pb2 as rpc_pb
+#from protobuf.socketrpc import logger
+from controller import SocketRpcController
+import error
 
 # Configure package logging
-log = logger.getLogger(__name__)
+#log = logger.getLogger(__name__)
 
 
 class SocketFactory():
@@ -289,7 +289,7 @@ class _LifeCycle():
         # If blocking, return response or raise error
         if done is None:
             if self.controller.failed():
-                raise RpcError(self.controller.error())
+                raise error.RpcError(self.controller.error())
             else:
                 return self.serviceResponse
 

@@ -1,11 +1,11 @@
 option py_generic_services = true;
 
-message HelloRequest
+message SearchRequest 
 {
-   required string my_name = 2;
+   required string query = 2;
 }
 
-message HelloResponse 
+message SearchResponse 
 {
   required string hello_world = 1;
 }
