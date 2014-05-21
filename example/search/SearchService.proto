@@ -7,7 +7,7 @@ message SearchRequest
 
 message SearchResponse 
 {
-  required string hello_world = 1;
+  required string response = 1;
 }
 
 service SearchService {
