@@ -1,11 +1,12 @@
 from SearchService_pb2 import SearchService_Stub, SearchService, SearchRequest
-from channel import SocketRpcChannel
+from zerorpc.channel import ZeroMQChannel
+from controller import SocketRpcController
 
 
 
-channel = SocketRpcChannel(host='localhost', port=1234)
+channel = ZeroMQChannel(host='localhost', port=1234)
 service = SearchService_Stub(channel)
-controller = channel.newController()
+controller = SocketRpcController()
 
 request = SearchRequest()
 request.query = "tim"
