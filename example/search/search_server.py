@@ -1,5 +1,5 @@
 from SearchService_pb2 import SearchService, SearchResponse
-from server import SocketRpcServer
+from zerorpc.server import ZeroMQServer
 
 class SearchImpl(SearchService):
     def Search(self, controller, request, done):
@@ -10,13 +10,6 @@ class SearchImpl(SearchService):
         response = SearchResponse()
         response.response = "booooya"
 
-
         done.run(response)
 
-
-
-srv = SocketRpcServer(1234)
-srv.registerService(SearchImpl())
-
-print "SERVING"
-srv.run()
+ZeroMQServer("127.0.0.1", 1234, SearchImpl()).server_forever()
