@@ -20,7 +20,7 @@ class ZeroMQServer(object):
         self.socket.bind("tcp://%s:%s" % (host, port))
         self.service = service
 
-    def server_forever(self,):
+    def serve_forever(self,):
         while True:
             request = self.socket.recv()
             self._handle(request)

@@ -12,4 +12,4 @@ class SearchImpl(SearchService):
 
         done.run(response)
 
-ZeroMQServer("127.0.0.1", 1234, SearchImpl()).server_forever()
+ZeroMQServer("127.0.0.1", 1234, SearchImpl()).serve_forever()
