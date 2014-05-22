@@ -1,13 +1,9 @@
-async-services (WIP)
-====================
+Service Implementations for Google Protobufs
+=============================================
 
-This is a transport implementation for Google Protobuf Services:
+This is a collection of transport implementations for Google Protobuf Services:
 
 https://developers.google.com/protocol-buffers/docs/proto#services
-
-It currently uses zeroMQ as transport:
-
-http://zeromq.org/
 
 Build:
 -------------------
