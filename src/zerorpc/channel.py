@@ -33,7 +33,6 @@ class ZeroMQChannel(service.RpcChannel):
         self.socket.send(rpcRequest.SerializeToString())
 
     def _create_rpc_request(self, method, request):
-        '''Wrap the user's request in an RPC protocol message.'''
         rpcRequest = rpc_pb.Request()
         rpcRequest.request_proto = request.SerializeToString()
         rpcRequest.service_name = method.containing_service.full_name

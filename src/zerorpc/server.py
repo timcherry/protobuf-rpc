@@ -35,7 +35,7 @@ class ZeroMQServer(object):
 
     def _parse_outer_request(self, request):
         req_obj = rpc_pb.Request()
-        req_obj.MergeFromString(request)
+        req_obj.ParseFromString(request)
         return req_obj
 
     def _get_method(self, method_name):
