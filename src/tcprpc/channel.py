@@ -10,6 +10,5 @@ class RawTCPChannel(ProtoBufRPCChannel):
         self.socket.send(rpcRequest.SerializeToString())
 
     def recv_response(self):
-        rfile = self.socket.makefile('r')
-        byte_stream = rfile.read()
-        return byte_stream
+        resp = self.socket.recv(1024)
+        return resp
