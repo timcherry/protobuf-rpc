@@ -1,6 +1,6 @@
 import protos.rpc_pb2 as rpc_pb
 from common.controller import SocketRpcController
-
+from common.util import serialize_string
 
 class Callback(object):
     '''Class to allow execution of client-supplied callbacks.'''
@@ -31,9 +31,9 @@ class ProtoBufRPCServer(object):
         return self.service.DESCRIPTOR.FindMethodByName(method_name)
 
     def parse_inner_request(self, request, method):
-        proto_req = self.service.GetRequestClass(method)()
-        proto_req.ParseFromString(request.request_proto)
-        return proto_req
+        return serialize_string(request.request_proto,
+                                self.service.GetRequestClass(method))
+
 
     def do_request(self, method, proto_request):
         controller = SocketRpcController()

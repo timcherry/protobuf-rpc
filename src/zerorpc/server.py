@@ -12,5 +12,6 @@ class ZeroMQServer(ProtoBufRPCServer):
     def serve_forever(self,):
         while True:
             request = self.socket.recv()
+            import pdb; pdb.set_trace()
             response = self.handle(request)
             self.socket.send(response.SerializeToString())
