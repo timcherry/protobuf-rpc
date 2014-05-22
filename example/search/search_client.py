@@ -1,6 +1,6 @@
 from SearchService_pb2 import SearchService_Stub, SearchService, SearchRequest
 from zerorpc.channel import ZeroMQChannel
-from controller import SocketRpcController
+from common.controller import SocketRpcController
 
 def callback(response):
     print "Server response", response.response

@@ -1,6 +1,6 @@
 import zmq
 import protos.rpc_pb2 as rpc_pb
-from controller import SocketRpcController
+from common.controller import SocketRpcController
 
 class Callback(object):
     '''Class to allow execution of client-supplied callbacks.'''

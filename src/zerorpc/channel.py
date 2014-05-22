@@ -1,8 +1,6 @@
 import google.protobuf.service as service
 import protos.rpc_pb2 as rpc_pb
 import zmq
-from controller import SocketRpcController
-
 
 class ZeroMQChannel(service.RpcChannel):
     def __init__(self, host='localhost', port=8090):
