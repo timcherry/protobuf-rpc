@@ -2,7 +2,7 @@ import zmq
 import protos.rpc_pb2 as rpc_pb
 from controller import SocketRpcController
 
-class Callback():
+class Callback(object):
     '''Class to allow execution of client-supplied callbacks.'''
 
     def __init__(self):
@@ -23,7 +23,8 @@ class ZeroMQServer(object):
     def serve_forever(self,):
         while True:
             request = self.socket.recv()
-            self._handle(request)
+            response = self._handle(request)
+            self.socket.send(response.SerializeToString())
 
     def _handle(self, request):
         req_obj = self._parse_outer_request(request)
@@ -49,3 +50,6 @@ class ZeroMQServer(object):
         controller = SocketRpcController()
         callback = Callback()
         self.service.CallMethod(method, controller, proto_request, callback)
+        response = rpc_pb.Response()
+        response.response_proto = callback.response.SerializeToString()
+        return response

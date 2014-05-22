@@ -16,6 +16,8 @@ class ZeroMQChannel(service.RpcChannel):
         self._validate_requst(controller, request)
         rpc_request = self._create_rpc_request(method, request)
         self._send_rpc_request(rpc_request)
+        response = self._recv_response()
+        resp_obj = self._serialize_response(response, response_class)
 
     def _validate_requst(self, controller, request):
         if controller.failed():
@@ -33,3 +35,12 @@ class ZeroMQChannel(service.RpcChannel):
         rpcRequest.service_name = method.containing_service.full_name
         rpcRequest.method_name = method.name
         return rpcRequest
+
+    def _recv_response(self):
+        resp = self.socket.recv()
+        return resp
+
+    def _serialize_response(self, response, response_class):
+        resp_obj = response_class()
+        resp_obj.ParseFromString(response)
+        return resp_obj
