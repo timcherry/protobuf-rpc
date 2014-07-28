@@ -15,12 +15,16 @@ class Callback(object):
 
 
 class ProtoBufRPCServer(object):
-    def handle(self, request):
+    def __init__(self, executor):
+        self.executor = executor
+
+    def handle(self, conn, request):
         req_obj = self.parse_outer_request(request)
         method = self.get_method(req_obj.method_name)
         req_proto = self.parse_inner_request(req_obj, method)
-        response = self.do_request(method, req_proto)
-        return response
+        future = self.executor.submit(self.do_request, method, req_proto)
+        future.add_done_callback(functools.partial(self._serialize_response, conn))
+        return future
 
     def parse_outer_request(self, request):
         req_obj = rpc_pb.Request()
@@ -42,3 +46,15 @@ class ProtoBufRPCServer(object):
         response = rpc_pb.Response()
         response.response_proto = callback.response.SerializeToString()
         return response
+
+    def _serialize_response(self, conn, future):
+        try:
+            v = future.get(0)
+        except TimeoutError:
+            v = rpc_pb.Response()
+            v.error_reason = v.TIMEOUT
+        except:
+            v.error_reason = v.ERROR
+
+        conn.send(v.SerializeToString())
+

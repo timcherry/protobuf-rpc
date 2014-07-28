@@ -1,6 +1,6 @@
 from SearchService_pb2 import SearchService, SearchResponse
 from zerorpc.server import ZeroMQServer
-from tcprpc.server import RawTCPServer
+from tcprpc.server import GeventStreamServer
 
 
 class SearchImpl(SearchService):
@@ -10,4 +10,4 @@ class SearchImpl(SearchService):
         response.response = "booooya"
         done.run(response)
 
-RawTCPServer("127.0.0.1", 1234, SearchImpl()).serve_forever()
+GeventStreamServer("127.0.0.1", 1234, SearchImpl()).serve_forever()

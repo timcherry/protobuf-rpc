@@ -1,18 +1,14 @@
-import socket
 from common.base_server import ProtoBufRPCServer
+from gevent.server import StreamServer
 
 
-class RawTCPServer(ProtoBufRPCServer):
+class GeventStreamServer(ProtoBufRPCServer):
     def __init__(self, host, port, service):
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.socket.bind((host, port))
+        self.server = StreamServer((host, port), self.read_inbound)
         self.service = service
 
     def serve_forever(self,):
-        self.socket.listen(5)
-        while True:
-            conn, addr = self.socket.accept()
-            byte_stream = conn.recv(1024)
-            response = self.handle(byte_stream)
-            conn.send(response.SerializeToString())
+        self.server.serve_forever()
+
+    def read_inbound(self, socket, address):
+        import pdb; pdb.set_trace()
