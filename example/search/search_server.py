@@ -1,6 +1,5 @@
 from SearchService_pb2 import SearchService, SearchResponse
-from zerorpc.server import ZeroMQServer
-from tcprpc.server import GeventStreamServer
+from protobuf_rpc.tcprpc.server import GeventStreamServer
 
 
 class SearchImpl(SearchService):

@@ -1,5 +1,5 @@
 import socket
-from common.base_channel import ProtoBufRPCChannel
+from protobuf_rpc.common.base_channel import ProtoBufRPCChannel
 
 class RawTCPChannel(ProtoBufRPCChannel):
     def __init__(self, host, port):

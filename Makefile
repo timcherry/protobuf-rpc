@@ -1,14 +1,28 @@
 .PHONY: clean env/bin/activate stats
 
-test: env
-	. env/bin/activate;
-	nosetests $(NOSEARGS);
+export PYTHONPATH=$PYTHONPATH:./
 
-run: env
-	env/bin/python src/run.py
+PWD=`pwd`
+ENV = env
+PIP = $(PWD)/env/bin/pip
+PYTHON = exec $(PWD)/env/bin/python
+JENKINS_NOSE_ARGS = --with-xunit
+
+test:
+	env/bin/nosetests tests/
+ 
+test-jenkins:
+	env/bin/nosetests tests/ $(JENKINS_NOSE_ARGS)
 
 clean:
 	find src/ -type f -name "*.pyc" -exec rm {} \;
+
+
+test-client: env
+	env/bin/python example/search/search_client.py 
+
+test-server: env
+	env/bin/python example/search/search_server.py 
 
 env: env/bin/activate
 env/bin/activate: requirements.txt

@@ -1,7 +1,6 @@
 from SearchService_pb2 import SearchService_Stub, SearchService, SearchRequest
-from zerorpc.channel import ZeroMQChannel
-from tcprpc.channel import RawTCPChannel
-from common.controller import SocketRpcController
+from protobuf_rpc.tcprpc.channel import RawTCPChannel
+from protobuf_rpc.common.controller import SocketRpcController
 
 def callback(response):
     print "Server response", response.response

@@ -1,4 +1,4 @@
-from common.base_server import ProtoBufRPCServer
+from protobuf_rpc.common.base_server import ProtoBufRPCServer
 from gevent.server import StreamServer
 
 

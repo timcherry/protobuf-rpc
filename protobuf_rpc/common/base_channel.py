@@ -1,6 +1,6 @@
 import google.protobuf.service as service
-import protos.rpc_pb2 as rpc_pb
-from common.util import serialize_string
+import protobuf_rpc.protos.rpc_pb2 as rpc_pb
+from protobuf_rpc.common.util import serialize_string
 
 class ProtoBufRPCChannel(service.RpcChannel):
 

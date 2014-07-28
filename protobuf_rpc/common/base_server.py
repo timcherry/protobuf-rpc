@@ -1,6 +1,6 @@
-import protos.rpc_pb2 as rpc_pb
-from common.controller import SocketRpcController
-from common.util import serialize_string
+import protobuf_rpc.protos.rpc_pb2 as rpc_pb
+from protobuf_rpc.common.controller import SocketRpcController
+from protobuf_rpc.common.util import serialize_string
 
 class Callback(object):
     '''Class to allow execution of client-supplied callbacks.'''
