@@ -20,3 +20,17 @@ Build Protobufs:
 ```sh
 protoc --proto_path=example/search/ --python_out=example/search/ example/search/SearchService.proto
 ```
+
+Build Server:
+-------------------
+
+```sh
+make test-server
+```
+
+Build Client:
+-------------------
+
+```sh
+make test-client
+```
