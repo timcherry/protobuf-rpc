@@ -5,3 +5,7 @@ eggs
 parts
 *.swp
 *_pb2.py
+.project
+.idea
+.iml
+env/
