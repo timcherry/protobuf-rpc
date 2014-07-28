@@ -1,5 +1,7 @@
 .PHONY: clean env/bin/activate stats
 
+include pb2.mk
+
 export PYTHONPATH=$PYTHONPATH:./
 
 PWD=`pwd`
@@ -7,6 +9,8 @@ ENV = env
 PIP = $(PWD)/env/bin/pip
 PYTHON = exec $(PWD)/env/bin/python
 JENKINS_NOSE_ARGS = --with-xunit
+
+all: env pb2_compile
 
 test:
 	env/bin/nosetests tests/
