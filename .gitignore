@@ -7,5 +7,7 @@ parts
 *_pb2.py
 .project
 .idea
-.iml
+*.iml
 env/
+bin/
+.pydevproject
