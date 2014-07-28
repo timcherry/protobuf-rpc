@@ -21,14 +21,14 @@ Build Protobufs:
 protoc --proto_path=example/search/ --python_out=example/search/ example/search/SearchService.proto
 ```
 
-Build Server:
+Run Test Server:
 -------------------
 
 ```sh
 make test-server
 ```
 
-Build Client:
+Run Test Client:
 -------------------
 
 ```sh
