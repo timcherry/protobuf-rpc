@@ -9,16 +9,15 @@ Build:
 -------------------
 
 ```sh
-make env
+make all
 ```
-
-
 
 Build Protobufs:
 -------------------
+This is done as part of `make all` but to explicitly build protobufs:
 
 ```sh
-protoc --proto_path=example/search/ --python_out=example/search/ example/search/SearchService.proto
+make pb2_compile
 ```
 
 Run Test Server:
