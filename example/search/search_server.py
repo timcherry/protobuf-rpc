@@ -1,5 +1,5 @@
 from SearchService_pb2 import SearchService, SearchResponse
-from protobuf_rpc.tcprpc.server import GeventStreamServer
+from protobuf_rpc.server import GServer
 
 
 class SearchImpl(SearchService):
@@ -9,4 +9,4 @@ class SearchImpl(SearchService):
         response.response = "booooya"
         done.run(response)
 
-GeventStreamServer("127.0.0.1", 1234, SearchImpl()).serve_forever()
+GServer("*", 1234, SearchImpl()).serve_forever()

@@ -1,11 +1,21 @@
-from SearchService_pb2 import SearchService_Stub, SearchService, SearchRequest
-from protobuf_rpc.tcprpc.channel import RawTCPChannel
-from protobuf_rpc.common.controller import SocketRpcController
+import zmq
+
+from SearchService_pb2 import SearchService_Stub, SearchRequest
+from protobuf_rpc.channel import ZeroMQChannel
+from protobuf_rpc.controller import SocketRpcController
+
+
 
 def callback(response):
     print "Server response", response.response
 
-channel = RawTCPChannel(host="127.0.0.1", port=1234)
+
+ctx = zmq.Context() # create a new context to kick the wheels
+sock = ctx.socket(zmq.REQ)
+sock.connect('tcp://127.0.0.1:1234')
+
+
+channel = ZeroMQChannel(host="127.0.0.1", port=1234)
 service = SearchService_Stub(channel)
 controller = SocketRpcController()
 

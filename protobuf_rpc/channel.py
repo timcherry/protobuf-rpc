@@ -1,5 +1,5 @@
 import zmq
-from common.base_channel import ProtoBufRPCChannel
+from protobuf_rpc.base_channel import ProtoBufRPCChannel
 
 
 class ZeroMQChannel(ProtoBufRPCChannel):

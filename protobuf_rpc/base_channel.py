@@ -1,6 +1,6 @@
 import google.protobuf.service as service
-import protobuf_rpc.protos.rpc_pb2 as rpc_pb
-from protobuf_rpc.common.util import serialize_string
+from protobuf_rpc.protos.rpc_pb2 import Request, Response, BAD_REQUEST_PROTO
+from protobuf_rpc.util import serialize_string
 
 class ProtoBufRPCChannel(service.RpcChannel):
 
@@ -9,7 +9,7 @@ class ProtoBufRPCChannel(service.RpcChannel):
         rpc_request = self.create_rpc_request(method, request)
         self.send_rpc_request(rpc_request)
         response = self.recv_response()
-        resp_obj = serialize_string(response, rpc_pb.Response)
+        resp_obj = serialize_string(response, Response)
         serialized_resp_obj = serialize_string(resp_obj.response_proto,
                                                      response_class)
         if done:
@@ -19,10 +19,10 @@ class ProtoBufRPCChannel(service.RpcChannel):
         if controller.failed():
             return
         if not request.IsInitialized():
-            controller.handleError(rpc_pb.BAD_REQUEST_PROTO, "Client requst not initialized.")
+            controller.handleError(BAD_REQUEST_PROTO, "Client requst not initialized.")
 
     def create_rpc_request(self, method, request):
-        rpcRequest = rpc_pb.Request()
+        rpcRequest = Request()
         rpcRequest.request_proto = request.SerializeToString()
         rpcRequest.service_name = method.containing_service.full_name
         rpcRequest.method_name = method.name

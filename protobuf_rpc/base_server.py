@@ -1,6 +1,6 @@
-import protobuf_rpc.protos.rpc_pb2 as rpc_pb
-from protobuf_rpc.common.controller import SocketRpcController
-from protobuf_rpc.common.util import serialize_string
+from protobuf_rpc.protos.rpc_pb2 import Request, Response
+from protobuf_rpc.controller import SocketRpcController
+from protobuf_rpc.util import serialize_string
 
 class Callback(object):
     '''Class to allow execution of client-supplied callbacks.'''
@@ -23,7 +23,7 @@ class ProtoBufRPCServer(object):
         return response
 
     def parse_outer_request(self, request):
-        req_obj = rpc_pb.Request()
+        req_obj = Request()
         req_obj.ParseFromString(request)
         return req_obj
 
@@ -39,7 +39,7 @@ class ProtoBufRPCServer(object):
         controller = SocketRpcController()
         callback = Callback()
         self.service.CallMethod(method, controller, proto_request, callback)
-        response = rpc_pb.Response()
+        response = Response()
         response.response_proto = callback.response.SerializeToString()
         return response
 
