@@ -1,5 +1,5 @@
-Service Implementations for Google Protobufs
-=============================================
+ZeroMQ+Gevent RPC Implementation for Google Protobufs Services
+===============================================================
 
 This is a collection of transport implementations for Google Protobuf Services:
 
