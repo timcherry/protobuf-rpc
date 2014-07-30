@@ -5,6 +5,13 @@ This is a collection of transport implementations for Google Protobuf Services:
 
 https://developers.google.com/protocol-buffers/docs/proto#services
 
+Requires:
+-------------------
+
+1. python2.7
+2. Virtualenv 1.11.6
+3. protoc 2.5.0 (https://code.google.com/p/protobuf/downloads/list)
+
 Build:
 -------------------
 
