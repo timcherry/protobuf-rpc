@@ -1,7 +1,7 @@
 ZeroMQ+Gevent RPC Implementation for Google Protobufs Services
 ===============================================================
 
-Python library implemenation for GoogleProtobuf Services(RPC). Uses ZeroMQ for transport layer. Server Uses Gevent for threading.
+Python implemenation of GoogleProtobuf Services(RPC). Uses ZeroMQ for transport layer. Server Uses Gevent for threading.
 
 https://developers.google.com/protocol-buffers/docs/proto#services
 
