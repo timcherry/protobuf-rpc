@@ -1,9 +1,16 @@
 ZeroMQ+Gevent RPC Implementation for Google Protobufs Services
 ===============================================================
 
-This is a collection of transport implementations for Google Protobuf Services:
+Python implemenation of GoogleProtobuf Services(RPC). Uses ZeroMQ for transport layer. Server uses Gevent for threading.
 
 https://developers.google.com/protocol-buffers/docs/proto#services
+
+Requires:
+-------------------
+
+1. python2.7
+2. Virtualenv 1.11.6
+3. protoc 2.5.0 (https://code.google.com/p/protobuf/downloads/list)
 
 Build:
 -------------------
@@ -32,4 +39,11 @@ Run Test Client:
 
 ```sh
 make test-client
+```
+
+Build a python egg:
+---------------------
+
+```sh
+make package
 ```
