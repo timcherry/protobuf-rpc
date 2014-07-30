@@ -1,8 +1,8 @@
-import google.protobuf.service as service
+from google.protobuf.service import RpcChannel
 from protobuf_rpc.protos.rpc_pb2 import Request, Response, BAD_REQUEST_PROTO
 from protobuf_rpc.util import serialize_string
 
-class ProtoBufRPCChannel(service.RpcChannel):
+class ProtoBufRPCChannel(RpcChannel):
 
     def CallMethod(self, method, controller, request, response_class, done):
         self.validate_requst(controller, request)

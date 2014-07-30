@@ -1,7 +1,7 @@
-import google.protobuf.service as service
+from google.protobuf.service import RpcController
 
 
-class SocketRpcController(service.RpcController):
+class SocketRpcController(RpcController):
     ''' RpcController implementation to be used by the SocketRpcChannel class.
 
     The RpcController is used to mediate a single method call.
