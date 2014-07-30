@@ -21,12 +21,15 @@ test-jenkins:
 clean:
 	find src/ -type f -name "*.pyc" -exec rm {} \;
 
+package: env
+	$(PYTHON) setup.py bdist_egg
+	$(PYTHON) setup.py sdist 
 
 test-client: env
-	env/bin/python example/search/search_client.py 
+	$(PYTHON) example/search/search_client.py 
 
 test-server: env
-	env/bin/python example/search/search_server.py 
+	$(PYTHON) example/search/search_server.py 
 
 env: env/bin/activate
 env/bin/activate: requirements.txt
