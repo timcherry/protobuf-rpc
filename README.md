@@ -40,3 +40,10 @@ Run Test Client:
 ```sh
 make test-client
 ```
+
+Build a python egg:
+---------------------
+
+```sh
+make package
+```
