@@ -1,4 +1,4 @@
-import zmq
+import zmq.green as zmq
 from protobuf_rpc.base_channel import ProtoBufRPCChannel
 
 
@@ -14,4 +14,3 @@ class ZeroMQChannel(ProtoBufRPCChannel):
     def recv_response(self):
         resp = self.socket.recv()
         return resp
-

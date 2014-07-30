@@ -1,3 +1,6 @@
+from gevent import monkey
+monkey.patch_all()
+
 from SearchService_pb2 import SearchService, SearchResponse
 from protobuf_rpc.server import GServer
 
