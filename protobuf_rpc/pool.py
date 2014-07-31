@@ -1,5 +1,6 @@
 import zmq.green as zmq
 from Queue import Queue
+import random
 
 class ObjectPool(object):
     def __init__(self, obj=None, size=None, maxsize=None, *args, **kwargs):
@@ -24,6 +25,7 @@ class ObjectPool(object):
 class ZMQConnection(object):
     def __init__(self, hosts):
         context = zmq.Context()
+        random.shuffle(hosts)
         self.socket = context.socket(zmq.REQ)
         [
             self.socket.connect("tcp://%s:%s" % (host, port))
