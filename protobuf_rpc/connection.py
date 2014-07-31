@@ -1,6 +1,4 @@
-#import zmq.green as zmq
-import zmq
-from gevent import Timeout
+import zmq.green as zmq
 import random
 
 class TooLong(Exception):
