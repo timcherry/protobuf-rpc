@@ -7,8 +7,7 @@ class ProtoBufRPCChannel(RpcChannel):
     def CallMethod(self, method, controller, request, response_class, done):
         self.validate_requst(controller, request)
         rpc_request = self.create_rpc_request(method, request)
-        self.send_rpc_request(rpc_request)
-        response = self.recv_response()
+        response = self.send_rpc_request(rpc_request)
         resp_obj = serialize_string(response, Response)
         serialized_resp_obj = serialize_string(resp_obj.response_proto,
                                                      response_class)

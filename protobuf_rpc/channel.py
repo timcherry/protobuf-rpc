@@ -1,16 +1,25 @@
 import zmq.green as zmq
+# import zmq
 from protobuf_rpc.base_channel import ProtoBufRPCChannel
-
+from protobuf_rpc.pool import ObjectPool, ZMQConnection
 
 class ZeroMQChannel(ProtoBufRPCChannel):
-    def __init__(self, host='localhost', port=8090):
-        context = zmq.Context()
-        self.socket = context.socket(zmq.REQ)
-        self.socket.connect("tcp://%s:%s" % (host, port))
+    def __init__(self, hosts):
+        self.connection_pool = ObjectPool(ZMQConnection,
+                                          size=10,
+                                          maxsize=100,
+                                          hosts=hosts)
 
-    def send_rpc_request(self, rpcRequest):
-        self.socket.send(rpcRequest.SerializeToString())
+    def send_rpc_request(self, request):
 
-    def recv_response(self):
-        resp = self.socket.recv()
+        try:
+            con = self.connection_pool.get()
+            con.send(request.SerializeToString())
+            resp = con.recv()
+        except Exception as e:
+            print "ERROR",e
+        finally:
+            if con:
+                self.connection_pool.release(con)
         return resp
+

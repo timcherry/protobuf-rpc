@@ -13,6 +13,7 @@ class GServer(ProtoBufRPCServer):
         self.gpool = Pool(1024)
         self.stop_event = Event()
         context = zmq.Context()
+        self.port = port
         self.socket = context.socket(zmq.ROUTER)
         self.socket.bind("tcp://%s:%s" % (host, port))
         self.service = service
@@ -28,6 +29,7 @@ class GServer(ProtoBufRPCServer):
     def handle_request(self, msg):
         assert len(msg) == 3
         (id_, null, request) = msg
+        assert null == ''
         response = self.handle(request)
         self.socket.send_multipart([id_, null, response.SerializeToString()])
 
