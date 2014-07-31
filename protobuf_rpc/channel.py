@@ -1,9 +1,8 @@
-import zmq.green as zmq
-# import zmq
 from protobuf_rpc.base_channel import ProtoBufRPCChannel
-from protobuf_rpc.pool import ObjectPool, ZMQConnection
+from protobuf_rpc.pool import ObjectPool
+from protobuf_rpc.connection import ZMQConnection
 
-class ZeroMQChannel(ProtoBufRPCChannel):
+class ZMQChannel(ProtoBufRPCChannel):
     def __init__(self, hosts):
         self.connection_pool = ObjectPool(ZMQConnection,
                                           size=10,
@@ -11,15 +10,9 @@ class ZeroMQChannel(ProtoBufRPCChannel):
                                           hosts=hosts)
 
     def send_rpc_request(self, request):
-
-        try:
-            con = self.connection_pool.get()
-            con.send(request.SerializeToString())
-            resp = con.recv()
-        except Exception as e:
-            print "ERROR",e
-        finally:
-            if con:
-                self.connection_pool.release(con)
+        con = self.connection_pool.get()
+        con.send(request.SerializeToString())
+        resp = con.recv()
+        self.connection_pool.release(con)
         return resp
 
