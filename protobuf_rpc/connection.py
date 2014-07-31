@@ -1,11 +1,6 @@
 import zmq.green as zmq
 import random
 
-class TooLong(Exception):
-    def __init__(self,):
-        import pdb; pdb.set_trace()
-
-
 
 class ZMQConnection(object):
 
@@ -28,5 +23,6 @@ class ZMQConnection(object):
         if self.poller.poll(timeout):
             resp = self.socket.recv()
         else:
+            # TODO: remove host that just timedout
             raise IOError("Timeout processing request.")
         return resp
