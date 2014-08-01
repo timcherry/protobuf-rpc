@@ -27,6 +27,8 @@ rpc_pool = ObjectPool(ZMQConnection,
                       hosts=hosts)
 
 
+NUM_REQUESTS = 10 * 1000
+
 def http_hammer():
     r = http_session.get(http_url)
     assert r.text == 'pong'
@@ -38,14 +40,17 @@ def rpc_hammer():
     assert resp == 'pong'
     rpc_pool.release(con)
 
+
 def run_hammer(hammer_func):
     start_time = time.time()
-    for x in range(1, 10000):
+    for x in range(1, NUM_REQUESTS):
         gpool.spawn(hammer_func)
     gpool.join()
     end_time = time.time()
     elapsed = end_time - start_time
-    print "Elapsed time:",(elapsed)
+    average = elapsed / NUM_REQUESTS
+    print "\tTotal Elapsed time:",(elapsed)
+    print "\ttAverage Request time:",(average)
 
 
 def run():
