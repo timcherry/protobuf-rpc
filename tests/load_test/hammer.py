@@ -15,7 +15,7 @@ adapter = requests.adapters.HTTPAdapter(pool_connections=10,
                                         pool_block=True)
 http_session.mount('http://', adapter)
 
-http_url = "http://127.0.0.1:5000/ping"
+http_url = "http://127.0.0.1:5001/ping"
 
 gpool = Pool(100)
 
