@@ -54,7 +54,7 @@ Performance Results:
 ---------------------
 Ping-Pong hammer tests for 10K requets.
 
-Environmeht: EC2, c1.medium instance, ubuntu-precise image:
+Environment: EC2, c1.medium instance, ubuntu-precise image:
 
 HTTP:
 
