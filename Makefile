@@ -19,7 +19,9 @@ test-jenkins:
 	env/bin/nosetests tests/ $(JENKINS_NOSE_ARGS)
 
 clean:
-	find src/ -type f -name "*.pyc" -exec rm {} \;
+	rm -rf build/
+	rm -rf dist/
+	find protobuf_rpc/ -type f -name "*.pyc" -exec rm {} \;
 
 package: env
 	$(PYTHON) setup.py bdist_egg
