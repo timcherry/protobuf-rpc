@@ -47,3 +47,24 @@ Build a python egg:
 ```sh
 make package
 ```
+
+
+
+Performance Results:
+---------------------
+Ping-Pong hammer tests for 10K requets:
+
+HTTP:
+
+	Total Elapsed time (sec): 24.0618028641
+	Average Request time (ms): 2.40618028641
+
+RPC Direct Connections:
+
+	Total Elapsed time (sec): 2.44900202751
+	Average Request time (ms): 0.244900202751
+
+RPC with ELB:
+
+	Total Elapsed time (sec): 3.47903800011
+	Average Request time (ms): 0.347903800011
