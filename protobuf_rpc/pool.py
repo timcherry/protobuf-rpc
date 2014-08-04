@@ -17,7 +17,6 @@ class ObjectPool(object):
 
     def get(self, block=True, timeout=None):
         if self.queue.empty() and self.cursize < self.maxsize:
-            print "CUR SIZE", self.cursize
             self.cursize += 1
             self.queue.put(self.obj(*self.args, **self.kwargs))
         return self.queue.get(block=block, timeout=timeout)

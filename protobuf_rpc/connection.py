@@ -19,7 +19,7 @@ class ZMQConnection(object):
     def send(self, req):
         self.socket.send(req)
 
-    def recv(self,timeout=2*1000):
+    def recv(self, timeout=2*1000):
         if self.poller.poll(timeout):
             resp = self.socket.recv()
         else:
