@@ -56,6 +56,8 @@ Ping-Pong hammer tests for 10K requets.
 
 Environment: EC2, c1.medium instance, ubuntu-precise image:
 
+See: `protobuf-rpc/tests/load_test/hammer.py`
+
 HTTP:
 
 	Total Elapsed time (sec): 24.0618028641
