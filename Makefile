@@ -1,5 +1,7 @@
 .PHONY: clean env/bin/activate stats
 
+include pb2.mk
+
 export PYTHONPATH=$PYTHONPATH:./
 
 PWD=`pwd`
@@ -39,9 +41,6 @@ load-server-rpc: env
 
 load-server-http: env
 	$(PYTHON) tests/load_test/http.py 
-
-pb2_compile:
-	protoc --python_out=./ protobuf_rpc/protos/rpc.proto
 
 env: env/bin/activate
 env/bin/activate: requirements.txt
