@@ -4,16 +4,16 @@ monkey.patch_all()
 from gevent.pool import Pool
 from gevent.event import Event
 import zmq.green as zmq
-
 from protobuf_rpc.base_server import ProtoBufRPCServer
 
 
 class GServer(ProtoBufRPCServer):
-    def __init__(self, host, port, service, poolsize=128):
+    def __init__(self, host, port, ctx, service, poolsize=128):
         self.gpool = Pool(poolsize)
         self.stop_event = Event()
         context = zmq.Context()
         self.port = port
+        from nose.tools import set_trace; set_trace()
         self.socket = context.socket(zmq.ROUTER)
         self.socket.bind("tcp://%s:%s" % (host, port))
         self.service = service
