@@ -9,8 +9,8 @@ from protobuf_rpc.base_server import ProtoBufRPCServer
 
 
 class GServer(ProtoBufRPCServer):
-    def __init__(self, host, port, service):
-        self.gpool = Pool(1024)
+    def __init__(self, host, port, service, pool_size=128):
+        self.gpool = Pool(pool_size)
         self.stop_event = Event()
         context = zmq.Context()
         self.port = port

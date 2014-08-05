@@ -3,10 +3,10 @@ from protobuf_rpc.pool import ObjectPool
 from protobuf_rpc.connection import ZMQConnection
 
 class ZMQChannel(ProtoBufRPCChannel):
-    def __init__(self, hosts):
+    def __init__(self, hosts, pool_size=10, max_pool_size=100):
         self.connection_pool = ObjectPool(ZMQConnection,
-                                          size=10,
-                                          maxsize=100,
+                                          size=pool_size,
+                                          maxsize=max_pool_size,
                                           hosts=hosts)
 
     def send_rpc_request(self, request):
