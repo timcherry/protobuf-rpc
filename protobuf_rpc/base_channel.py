@@ -5,7 +5,6 @@ from protobuf_rpc.util import serialize_string
 class ProtoBufRPCChannel(RpcChannel):
 
     def CallMethod(self, method, controller, request, response_class, done_callback):
-        import pdb; pdb.set_trace()
         self.validate_requst(controller, request)
         rpc_request = self.create_rpc_request(method, request)
         response = self.send_rpc_request(rpc_request)
