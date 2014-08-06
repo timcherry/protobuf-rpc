@@ -15,6 +15,3 @@ class ZMQChannel(ProtoBufRPCChannel):
         resp = con.recv()
         self.connection_pool.release(con)
         return resp
-
-    def shutdown(self):
-        pass

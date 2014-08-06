@@ -27,7 +27,6 @@ class TestChannel(unittest.TestCase):
 
 
     def tearDown(self,):
-        self.channel.shutdown()
         self.server.shutdown()
         self.server_thread.join()
 
