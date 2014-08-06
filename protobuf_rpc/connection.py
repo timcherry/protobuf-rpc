@@ -26,3 +26,6 @@ class ZMQConnection(object):
             # TODO: remove host that just timedout
             raise IOError("Timeout processing request.")
         return resp
+
+    def close(self,):
+        self.socket.close()
