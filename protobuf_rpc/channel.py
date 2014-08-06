@@ -10,8 +10,11 @@ class ZMQChannel(ProtoBufRPCChannel):
                                           hosts=hosts)
 
     def send_rpc_request(self, request):
-        con = self.connection_pool.get()
-        con.send(request.SerializeToString())
-        resp = con.recv()
-        self.connection_pool.release(con)
+        with self.connection_pool.get() as con:
+            con.send(request.SerializeToString())
+            try:
+                resp = con.recv()
+            except IOError:
+                con.close()
+                raise ObjectPool.Remove
         return resp

@@ -34,11 +34,15 @@ def http_hammer():
     assert r.text == 'pong'
 
 def rpc_hammer():
-    con = rpc_pool.get()
-    con.send("ping")
-    resp = con.recv()
-    assert resp == 'pong'
-    rpc_pool.release(con)
+    with rpc_pool.get() as con:
+        con.send("ping")
+        try:
+            resp = con.recv()
+        except IOError as ie:
+            con.close()
+            raise ObjectPool.Remove
+            return
+        assert resp == 'pong'
 
 
 def run_hammer(hammer_func):
