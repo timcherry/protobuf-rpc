@@ -23,25 +23,25 @@ def send_requests(thread_id):
     request = SearchRequest()
     request.query = "tim"
     print 'Thread %s, Sending Request 1'%(thread_id)
-    SearchService_Stub.Search(service, controller, request, callback=callback)
+    service.Search(controller, request, callback=callback)
 
 
 
-    req = SearchRequest()
-    req.query = "tim2"
-    print 'Thread %s, Sending Request 2'%(thread_id)
-    SearchService_Stub.Search(service, controller, req, callback=callback)
-
-
-    req = SearchRequest()
-    req.query = "tim3"
-    print 'Thread %s, Sending Request 3'%(thread_id)
-    SearchService_Stub.Search(service, controller, req, callback=callback)
-
-    req = SearchRequest()
-    req.query = "tim4"
-    print 'Thread %s, Sending Request 4'%(thread_id)
-    SearchService_Stub.Search(service, controller, req, callback=callback)
+    # req = SearchRequest()
+    # req.query = "tim2"
+    # print 'Thread %s, Sending Request 2'%(thread_id)
+    # SearchService_Stub.Search(service, controller, req, callback=callback)
+    #
+    #
+    # req = SearchRequest()
+    # req.query = "tim3"
+    # print 'Thread %s, Sending Request 3'%(thread_id)
+    # SearchService_Stub.Search(service, controller, req, callback=callback)
+    #
+    # req = SearchRequest()
+    # req.query = "tim4"
+    # print 'Thread %s, Sending Request 4'%(thread_id)
+    # SearchService_Stub.Search(service, controller, req, callback=callback)
 
 
 

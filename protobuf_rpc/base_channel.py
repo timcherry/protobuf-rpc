@@ -5,7 +5,7 @@ from protobuf_rpc.util import serialize_string
 class ProtoBufRPCChannel(RpcChannel):
 
     def CallMethod(self, method, controller, request, response_class, done_callback):
-        self.validate_requst(controller, request)
+        self.validate_request(controller, request)
         rpc_request = self.create_rpc_request(method, request)
         response = self.send_rpc_request(rpc_request)
         resp_obj = serialize_string(response, Response)
@@ -16,7 +16,7 @@ class ProtoBufRPCChannel(RpcChannel):
         else:
             return serialized_resp_obj
 
-    def validate_requst(self, controller, request):
+    def validate_request(self, controller, request):
         if controller.failed():
             return
         if not request.IsInitialized():
