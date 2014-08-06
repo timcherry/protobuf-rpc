@@ -1,5 +1,5 @@
 from google.protobuf.service import RpcChannel
-from protobuf_rpc.rpc_pb2 import Request, Response, BAD_REQUEST_PROTO
+from protobuf_rpc.protos.rpc_pb2 import Request, Response, BAD_REQUEST_PROTO
 from protobuf_rpc.util import serialize_string
 
 class ProtoBufRPCChannel(RpcChannel):
