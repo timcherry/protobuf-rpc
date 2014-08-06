@@ -24,4 +24,3 @@ class ObjectPool(object):
     def release(self, obj):
         assert isinstance(obj, self.obj)
         self.queue.put(obj)
-

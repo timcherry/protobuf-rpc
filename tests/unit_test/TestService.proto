@@ -1,0 +1,15 @@
+option py_generic_services = true;
+
+message Request
+{
+   required string query = 2;
+}
+
+message Response
+{
+  required string response = 1;
+}
+
+service TestService {
+  rpc Query (Request) returns (Response);
+}
