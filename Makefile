@@ -23,7 +23,7 @@ clean:
 	rm -rf dist/
 	find protobuf_rpc/ -type f -name "*.pyc" -exec rm {} \;
 
-package: env
+package: all
 	$(PYTHON) setup.py bdist_egg
 	$(PYTHON) setup.py sdist 
 
