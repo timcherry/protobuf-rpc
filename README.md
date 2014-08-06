@@ -27,6 +27,12 @@ This is done as part of `make all` but to explicitly build protobufs:
 make pb2_compile
 ```
 
+Unit Tests:
+-------------------
+```sh
+make test
+```
+
 Run Test Server:
 -------------------
 
