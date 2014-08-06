@@ -1,11 +1,11 @@
 option py_generic_services = true;
 
-message SearchRequest 
+message SearchRequest
 {
    required string query = 2;
 }
 
-message SearchResponse 
+message SearchResponse
 {
   required string response = 1;
 }

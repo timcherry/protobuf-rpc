@@ -19,10 +19,16 @@ class GServer(ProtoBufRPCServer):
 
     def serve_forever(self,):
         while not self.stop_event.is_set():
-            msg = self.socket.recv_multipart()
+            try:
+                msg = self.socket.recv_multipart()
+            except zmq.ZMQError:
+                if self.socket.closed:
+                    break
+                raise e
             self.gpool.spawn(self.handle_request, msg)
 
     def shutdown(self,):
+        self.socket.close()
         self.stop_event.set()
 
     def handle_request(self, msg):
