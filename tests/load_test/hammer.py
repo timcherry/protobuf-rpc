@@ -58,10 +58,10 @@ def run():
     #GreenletProfiler.set_clock_type('cpu')
     #GreenletProfiler.start()
     run_hammer(rpc_hammer)
-    print "Sleeping"
-    time.sleep(20)
-    print "Running HTTP HAMMER"
-    run_hammer(http_hammer)
+    #print "Sleeping"
+    #time.sleep(20)
+    #print "Running HTTP HAMMER"
+    #run_hammer(http_hammer)
     #GreenletProfiler.stop()
     #stats = GreenletProfiler.get_func_stats()
     #stats.print_all()

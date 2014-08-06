@@ -1,4 +1,4 @@
-from protobuf_rpc.protos.rpc_pb2 import Request, Response
+from protobuf_rpc.rpc_pb2 import Request, Response
 from protobuf_rpc.controller import SocketRpcController
 from protobuf_rpc.util import serialize_string
 
