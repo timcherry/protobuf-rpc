@@ -11,10 +11,14 @@ class ZMQChannel(ProtoBufRPCChannel):
 
     def send_rpc_request(self, request):
         with self.connection_pool.get() as con:
+            error = None
             con.send(request.SerializeToString())
             try:
                 resp = con.recv()
-            except IOError:
+            except IOError as ioe:
                 con.close()
+                error = ioe
                 raise ObjectPool.Remove
+        if error is not None:
+            raise error
         return resp
