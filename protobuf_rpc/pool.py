@@ -34,9 +34,7 @@ class ObjectPool(object):
             raise e
 
     def remove(self, obj):
-        print "RELEASING1234"
         self.cursize -= 1
-        print "QUEUE SIZE", self.queue.qsize()
 
     def _get(self, block, timeout):
         if self.queue.empty() and self.cursize < self.maxsize:
