@@ -22,7 +22,6 @@ class ProtoBufRPCChannel(RpcChannel):
             return
         error_class = ERROR_CODE_TO_ERROR_CLASS.get(resp_obj.error_code,
                                                     ProtobufError)
-        from nose.tools import set_trace; set_trace()
         error_message = getattr(resp_obj, "error_message", "RPC Error")
         raise error_class(error_message)
 
