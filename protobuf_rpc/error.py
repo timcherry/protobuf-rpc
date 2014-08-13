@@ -4,7 +4,7 @@ class ProtobufError(Exception):
     '''Base exception class for RPC protocol buffer errors.'''
 
     def __init__(self, message, rpc_error_code):
-        '''ProtobufError construictor.
+        '''ProtobufError constructor.
 
         message - Message string detailing error.
         rpc_error_code - Error code from rpc.proto file.
