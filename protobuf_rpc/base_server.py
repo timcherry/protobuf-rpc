@@ -21,24 +21,26 @@ class ProtoBufRPCServer(object):
         try:
             req_obj = self.parse_outer_request(request)
         except Exception as e:
-            return self.build_error_response(e, INVALID_REQUEST_PROTO)
+            return self.build_error_response(e.message, INVALID_REQUEST_PROTO)
 
         try:
             method = self.get_method(req_obj.method_name)
             if method is None:
                 raise MethodNotFoundError("Method %s not found"%(req_obj.method_name))
         except Exception as e:
-            return self.build_error_response(e, METHOD_NOT_FOUND)
+            return self.build_error_response(e.message, METHOD_NOT_FOUND)
 
         try:
             req_proto = self.parse_inner_request(req_obj, method)
         except Exception as e:
-            return self.build_error_response(e, BAD_REQUEST_PROTO)
+            return self.build_error_response(e.message, BAD_REQUEST_PROTO)
 
         try:
             response = self.do_request(method, req_proto)
+        except NotImplementedError as e:
+            return self.build_error_response(e.message, METHOD_NOT_FOUND)
         except Exception as e:
-            return self.build_error_response(e, RPC_ERROR)
+            return self.build_error_response(e.message, RPC_ERROR)
 
         return response
 

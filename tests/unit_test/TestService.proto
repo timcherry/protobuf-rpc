@@ -12,4 +12,5 @@ message Response
 
 service TestService {
   rpc Query (Request) returns (Response);
+  rpc BadQuery (Request) returns (Response);
 }
