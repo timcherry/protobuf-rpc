@@ -10,7 +10,7 @@ import unittest
 
 class TestServer(TestService):
     def Query(self, controller, request, done):
-        assert  request.query == "PING"
+        assert request.query == "PING"
         response = Response()
         response.response = "PONG"
         done.run(response)
@@ -25,7 +25,6 @@ class TestChannel(unittest.TestCase):
         self.server = GServer("127.0.0.1", 12345, TestServer(), poolsize=1)
         self.server_thread = gevent.spawn(self.server.serve_forever)
 
-
     def tearDown(self,):
         self.server.shutdown()
         self.server_thread.join()
@@ -35,6 +34,6 @@ class TestChannel(unittest.TestCase):
         req = Request()
         req.query = "PING"
         resp = TestService_Stub.Query(self.service,
-                               self.controller,
-                               req)
+                                      self.controller,
+                                      req)
         self.assertEquals(resp.response, "PONG")

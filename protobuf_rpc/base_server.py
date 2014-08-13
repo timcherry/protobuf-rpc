@@ -1,6 +1,8 @@
-from protobuf_rpc.protos.rpc_pb2 import Request, Response
+from protobuf_rpc.protos.rpc_pb2 import Request, Response, RPC_ERROR,\
+    INVALID_REQUEST_PROTO, METHOD_NOT_FOUND, BAD_REQUEST_PROTO
 from protobuf_rpc.controller import SocketRpcController
 from protobuf_rpc.util import serialize_string
+from protobuf_rpc.error import MethodNotFoundError
 
 class Callback(object):
     '''Class to allow execution of client-supplied callbacks.'''
@@ -16,10 +18,28 @@ class Callback(object):
 
 class ProtoBufRPCServer(object):
     def handle(self, request):
-        req_obj = self.parse_outer_request(request)
-        method = self.get_method(req_obj.method_name)
-        req_proto = self.parse_inner_request(req_obj, method)
-        response = self.do_request(method, req_proto)
+        try:
+            req_obj = self.parse_outer_request(request)
+        except Exception as e:
+            return self.build_error_response(e, INVALID_REQUEST_PROTO)
+
+        try:
+            method = self.get_method(req_obj.method_name)
+            if method is None:
+                raise MethodNotFoundError("Method %s not found"%(req_obj.method_name))
+        except Exception as e:
+            return self.build_error_response(e, METHOD_NOT_FOUND)
+
+        try:
+            req_proto = self.parse_inner_request(req_obj, method)
+        except Exception as e:
+            return self.build_error_response(e, BAD_REQUEST_PROTO)
+
+        try:
+            response = self.do_request(method, req_proto)
+        except Exception as e:
+            return self.build_error_response(e, RPC_ERROR)
+
         return response
 
     def parse_outer_request(self, request):
@@ -43,14 +63,9 @@ class ProtoBufRPCServer(object):
         response.response_proto = callback.response.SerializeToString()
         return response
 
-    def _serialize_response(self, conn, future):
-        try:
-            v = future.get(0)
-        except TimeoutError:
-            v = rpc_pb.Response()
-            v.error_reason = v.TIMEOUT
-        except:
-            v.error_reason = v.ERROR
-
-        conn.send(v.SerializeToString())
-
+    def build_error_response(self, error_message, error_code=RPC_ERROR):
+        response = Response()
+        response.error_code = error_code
+        error_message = str(error_message)
+        response.error_message = error_message
+        return response
