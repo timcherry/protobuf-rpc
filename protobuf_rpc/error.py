@@ -1,5 +1,4 @@
-from protobuf.socketrpc import rpc_pb2 as rpc_pb
-
+from protobuf_rpc.protos.rpc_pb2 import *
 
 class ProtobufError(Exception):
     '''Base exception class for RPC protocol buffer errors.'''
@@ -19,7 +18,7 @@ class BadRequestDataError(ProtobufError):
 
     def __init__(self, message):
         super(BadRequestDataError, self).__init__(
-            message, rpc_pb.BAD_REQUEST_DATA)
+            message, BAD_REQUEST_DATA)
 
 
 class BadRequestProtoError(ProtobufError):
@@ -27,7 +26,7 @@ class BadRequestProtoError(ProtobufError):
 
     def __init__(self, message):
         super(BadRequestProtoError, self).__init__(
-            message, rpc_pb.BAD_REQUEST_PROTO)
+            message, BAD_REQUEST_PROTO)
 
 
 class ServiceNotFoundError(ProtobufError):
@@ -35,7 +34,7 @@ class ServiceNotFoundError(ProtobufError):
 
     def __init__(self, message):
         super(ServiceNotFoundError, self).__init__(
-            message, rpc_pb.SERVICE_NOT_FOUND)
+            message, SERVICE_NOT_FOUND)
 
 
 class MethodNotFoundError(ProtobufError):
@@ -43,21 +42,21 @@ class MethodNotFoundError(ProtobufError):
 
     def __init__(self, message):
         super(MethodNotFoundError, self).__init__(
-            message, rpc_pb.METHOD_NOT_FOUND)
+            message, METHOD_NOT_FOUND)
 
 
 class RpcError(ProtobufError):
     '''Exception generated for an RpcError.'''
 
     def __init__(self, message):
-        super(RpcError, self).__init__(message, rpc_pb.RPC_ERROR)
+        super(RpcError, self).__init__(message, RPC_ERROR)
 
 
 class RpcFailed(ProtobufError):
     '''Exception generated for an RpcFailed.'''
 
     def __init__(self, message):
-        super(RpcFailed, self).__init__(message, rpc_pb.RPC_FAILED)
+        super(RpcFailed, self).__init__(message, RPC_FAILED)
 
 
 class InvalidRequestProtoError(ProtobufError):
@@ -65,7 +64,7 @@ class InvalidRequestProtoError(ProtobufError):
 
     def __init__(self, message):
         super(InvalidRequestProtoError, self).__init__(
-            message, rpc_pb.INVALID_REQUEST_PROTO)
+            message, INVALID_REQUEST_PROTO)
 
 
 class BadResponseProtoError(ProtobufError):
@@ -73,18 +72,31 @@ class BadResponseProtoError(ProtobufError):
 
     def __init__(self, message):
         super(BadResponseProtoError, self).__init__(
-            message, rpc_pb.BAD_RESPONSE_PROTO)
+            message, BAD_RESPONSE_PROTO)
 
 
 class UnknownHostError(ProtobufError):
     '''Exception generated for an UnknownHostError.'''
 
     def __init__(self, message):
-        super(UnknownHostError, self).__init__(message, rpc_pb.UNKNOWN_HOST)
+        super(UnknownHostError, self).__init__(message, UNKNOWN_HOST)
 
 
 class IOError(ProtobufError):
     '''Exception generated for an IOError.'''
 
     def __init__(self, message):
-        super(IOError, self).__init__(message, rpc_pb.IO_ERROR)
+        super(IOError, self).__init__(message, IO_ERROR)
+
+
+ERROR_CODE_TO_ERROR_CLASS = {
+    BAD_REQUEST_DATA : BadRequestDataError,
+    BAD_REQUEST_PROTO : BadRequestProtoError,
+    SERVICE_NOT_FOUND : ServiceNotFoundError,
+    METHOD_NOT_FOUND : MethodNotFoundError,
+    RPC_ERROR: RpcError,
+    INVALID_REQUEST_PROTO: InvalidRequestProtoError,
+    BAD_RESPONSE_PROTO: BadResponseProtoError,
+    UNKNOWN_HOST: UnknownHostError,
+    IO_ERROR: IOError,
+}

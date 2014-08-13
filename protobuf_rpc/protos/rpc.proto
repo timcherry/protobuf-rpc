@@ -45,13 +45,13 @@ message Response {
   optional bytes response_proto = 1;
   
   // Error, if any
-  optional string error = 2;
+  optional string error_message = 2;
   
   // Was callback invoked
   optional bool callback = 3 [default = false];
   
   // Error Reason
-  optional ErrorReason error_reason = 4;
+  optional ErrorReason error_code = 4 [default = NO_ERROR];
 }
 
 // Possible error reasons
@@ -60,17 +60,20 @@ message Response {
 // have a response from the server.
 enum ErrorReason {
 
+  // No Error
+  NO_ERROR = 0;
+
   // Server-side errors
-  BAD_REQUEST_DATA = 0; // Server received bad request data
-  BAD_REQUEST_PROTO = 1; // Server received bad request proto
-  SERVICE_NOT_FOUND = 2; // Service not found on server
-  METHOD_NOT_FOUND = 3; // Method not found on server
-  RPC_ERROR = 4; // Rpc threw exception on server
-  RPC_FAILED = 5; // Rpc failed on server
+  BAD_REQUEST_DATA = 1; // Server received bad request data
+  BAD_REQUEST_PROTO = 2; // Server received bad request proto
+  SERVICE_NOT_FOUND = 3; // Service not found on server
+  METHOD_NOT_FOUND = 4; // Method not found on server
+  RPC_ERROR = 5; // Rpc threw exception on server
+  RPC_FAILED = 6; // Rpc failed on server
   
   // Client-side errors (these are returned by the client-side code)
-  INVALID_REQUEST_PROTO = 6; // Rpc was called with invalid request proto
-  BAD_RESPONSE_PROTO = 7; // Server returned a bad response proto
-  UNKNOWN_HOST = 8; // Could not find supplied host
-  IO_ERROR = 9; // I/O error while communicating with server
+  INVALID_REQUEST_PROTO = 7; // Rpc was called with invalid request proto
+  BAD_RESPONSE_PROTO = 8; // Server returned a bad response proto
+  UNKNOWN_HOST = 9; // Could not find supplied host
+  IO_ERROR = 10; // I/O error while communicating with server
 }
