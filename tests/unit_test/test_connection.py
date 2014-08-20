@@ -38,3 +38,11 @@ class TestConnection(unittest.TestCase):
         resp = self.con.recv()
         self.assertEquals(resp, mock_resp)
 
+    def test_timeout(self,):
+        self.hosts = [("127.0.0.1",12345)]
+        self.con = ZMQConnection(self.hosts)
+        mock_msg = "PING"
+        self.con.send(mock_msg)
+        [id_, null, req] = self.serv_con1.recv_multipart()
+        self.assertEquals(req, mock_msg)
+        self.assertRaises(IOError, self.con.recv, 1)
