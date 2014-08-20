@@ -4,8 +4,6 @@ monkey.patch_all()
 import zmq.green as zmq
 from protobuf_rpc.connection import ZMQConnection
 import unittest
-from mock import MagicMock, patch
-import socket
 
 class TestConnection(unittest.TestCase):
 
