@@ -29,3 +29,12 @@ class TestProtoBufRPCServer(unittest.TestCase):
         bad_request.request_proto =  "Foobar"
         response = self.pb_server.handle(bad_request.SerializeToString())
         self.assertEquals(response.error_code, METHOD_NOT_FOUND)
+
+    def test_bad_request_proto(self):
+        bad_request = Request()
+        bad_request.method_name = "Query"
+        bad_request.service_name = "TestService"
+        bad_request.request_proto =  "Foobar"
+        response = self.pb_server.handle(bad_request.SerializeToString())
+        self.assertEquals(response.error_code, BAD_REQUEST_PROTO)
+
