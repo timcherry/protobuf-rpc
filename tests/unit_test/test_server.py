@@ -5,6 +5,14 @@ from protobuf_rpc.server import GServer
 import unittest
 from mock import MagicMock, patch
 import socket
+from TestService_pb2 import Request, Response, TestService_Stub, TestService
+
+class TestServer(TestService):
+    def Query(self, controller, request, done):
+        assert request.query == "PING"
+        response = Response()
+        response.response = "PONG"
+        done.run(response)
 
 class TestGServer(unittest.TestCase):
 
@@ -22,3 +30,7 @@ class TestGServer(unittest.TestCase):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = s.connect_ex((self.host, self.port))
         self.assertEquals(result, 0)
+
+
+
+

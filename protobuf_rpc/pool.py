@@ -11,7 +11,7 @@ class ObjectPool(object):
     class Remove(Exception):
         pass
 
-    def __init__(self, obj=None, size=None, maxsize=None, *args, **kwargs):
+    def __init__(self, obj, size=None, maxsize=None, *args, **kwargs):
         self.queue = Queue(maxsize = maxsize)
         self.maxsize = maxsize
         self.size = size
