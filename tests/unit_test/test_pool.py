@@ -39,3 +39,5 @@ class TestObjectPool(unittest.TestCase):
             self.assertEquals(obj.foo, "foo")
             self.assertEquals(obj.bar, "bar")
 
+
+    
