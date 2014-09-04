@@ -8,14 +8,16 @@ import unittest
 class TestConnection(unittest.TestCase):
 
     def setUp(self,):
-        ctx1 = zmq.Context()
-        self.serv_con1 = ctx1.socket(zmq.ROUTER)
-        self.serv_con1.bind("tcp://127.0.0.1:12345")
+        self.ctx1 = zmq.Context()
+        self.serv_con1 = self.ctx1.socket(zmq.ROUTER)
+        self.addr = "tcp://127.0.0.1:12345"
+        self.serv_con1.bind(self.addr)
         self.hosts = [("127.0.0.1",12345)]
         self.con = ZMQConnection(self.hosts)
 
     def tearDown(self):
         self.con.close()
+        self.serv_con1.unbind(self.addr)
         self.serv_con1.close()
 
     def test_send(self):
